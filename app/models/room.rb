@@ -1,3 +1,5 @@
 class Room < ApplicationRecord
-  validates :name, presence: true, length: {maximum: 128}
+  NAME_LIMIT = 128
+
+  validates :name, presence: true, length: {maximum: NAME_LIMIT}
 end
