@@ -10,3 +10,4 @@
 console.log('Hello World from Webpacker')
 
 import '../stylesheets/application'
+import './chat_room'
