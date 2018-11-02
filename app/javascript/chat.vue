@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <p>{{ roomName }}</p>
   </div>
 </template>
 
 <script>
 export default {
+  props: ['roomName'],
   data: function () {
     return {
-      message: "Hello Vue!"
     }
   }
 }
