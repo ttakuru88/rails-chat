@@ -2,4 +2,4 @@
 
 %ul
   - @rooms.each do |room|
-    %li= room.name
+    %li= link_to room.name, room_path(id: room.name)
