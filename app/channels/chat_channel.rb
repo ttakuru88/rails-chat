@@ -11,7 +11,13 @@ class ChatChannel < ApplicationCable::Channel
   def receive(data)
     case data['event']
     when 'speak'
-      ChatChannel.broadcast_to(@room, data)
+      ChatChannel.broadcast_to(@room, {
+        event: data['event'],
+        message: {
+          text: data['message'],
+          time: I18n.l(Time.current),
+        }
+      })
     end
   end
 end

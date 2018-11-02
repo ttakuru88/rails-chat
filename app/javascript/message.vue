@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{ message }}
+    {{ message.text }} <small>({{ message.time }})</small>
   </li>
 </template>
 
@@ -19,4 +19,7 @@ export default {
 </script>
 
 <style scoped>
+small {
+  color: gray;
+}
 </style>
