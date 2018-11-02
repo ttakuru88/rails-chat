@@ -1,1 +1,5 @@
 #js-chat
+  %room-header(v-bind:room-name="roomName")
+  %speaker(v-on:speak="speak")
+  %ul
+    %message(v-for="message in revereseMessages" v-bind:message="message")

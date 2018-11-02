@@ -1,21 +1,18 @@
 <template>
-  <div id="app">
-    <p>{{ roomName }}</p>
-  </div>
+  <h2>{{ roomName }}</h2>
 </template>
 
 <script>
 export default {
   props: ['roomName'],
   data: function () {
-    return {
-    }
+    return { }
   }
 }
 </script>
 
 <style scoped>
-p {
+h2 {
   font-size: 2em;
   text-align: center;
 }

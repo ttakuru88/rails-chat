@@ -5,13 +5,26 @@ class Cable {
     this.consumer = actioncable.createConsumer()
   }
 
-  connect(roomName) {
-    this.consumer.subscriptions.create({
+  connect(roomName, callbacks) {
+    this.subscription = this.consumer.subscriptions.create({
       channel: 'ChatChannel',
       room_name: roomName,
+    },
+    {
       received: (data) => {
-        console.log('received:', data)
+        switch(data.event) {
+          case 'speak':
+            callbacks.onReceiveMessage(data)
+            break
+        }
       }
+    })
+  }
+
+  speak(message) {
+    this.subscription.send({
+      event: 'speak',
+      message: message,
     })
   }
 }
