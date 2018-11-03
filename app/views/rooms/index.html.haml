@@ -1,5 +1,18 @@
-%h1 Rooms
+.col-6.mb-4
+  %h2 チャットルーム一覧
 
-%ul
-  - @rooms.each do |room|
-    %li= link_to room.name, room_path(id: room.name)
+  %ul.list-group
+    - @rooms.each do |room|
+      %li.list-group-item= link_to room.name, room_path(id: room.name)
+
+= form_with model: @room || Room.new, class: 'col-6' do |f|
+  %h2 チャットルーム新規作成
+
+  - if @room.errors.present?
+    - @room.errors.full_messages.each do |error_message|
+      .alert.alert-danger= error_message
+
+  .form-group
+    = f.text_field :name, class: 'form-control', placeholder: 'Room Name'
+
+  = f.submit 'Create', class: 'btn btn-primary'
