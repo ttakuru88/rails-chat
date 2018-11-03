@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li class="list-group-item">
     <strong>{{ userName }}</strong>：{{ message.text }} <small>({{ message.time }})</small>
   </li>
 </template>

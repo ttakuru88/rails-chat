@@ -1,5 +1,5 @@
 <template>
-  <div class="form-row">
+  <div class="form-row mb-4">
     <div class="col-2">
       <input v-model="userName" placeholder="名前" class="form-control">
     </div>
