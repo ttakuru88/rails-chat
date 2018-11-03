@@ -5,7 +5,7 @@ import Speaker from '../speaker.vue'
 import Message from '../message.vue'
 
 const urlPaths = location.pathname.split('/')
-const roomName = urlPaths[urlPaths.length - 1]
+const roomName = decodeURIComponent(urlPaths[urlPaths.length - 1])
 const cable = new Cable
 
 document.addEventListener('DOMContentLoaded', () => {
