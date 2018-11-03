@@ -13,6 +13,6 @@
       .alert.alert-danger= error_message
 
   .form-group
-    = f.text_field :name, class: 'form-control', placeholder: 'Room Name'
+    = f.text_field :name, class: 'form-control', placeholder: Room.human_attribute_name(:name)
 
   = f.submit 'Create', class: 'btn btn-primary'

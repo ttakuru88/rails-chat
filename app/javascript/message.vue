@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{ message.text }} <small>({{ message.time }})</small>
+    <strong>{{ userName }}</strong>：{{ message.text }} <small>({{ message.time }})</small>
   </li>
 </template>
 
@@ -13,6 +13,11 @@ export default {
   methods: {
     speak: function() {
       this.$emit('speak', this.newMessage)
+    }
+  },
+  computed: {
+    userName: function() {
+      return this.message.user_name || '名無し'
     }
   }
 }

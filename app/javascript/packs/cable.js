@@ -21,9 +21,10 @@ class Cable {
     })
   }
 
-  speak(message) {
+  speak(userName, message) {
     this.subscription.send({
       event: 'speak',
+      user_name: userName,
       message: message,
     })
   }

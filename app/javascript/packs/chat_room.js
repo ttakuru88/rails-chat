@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
       Message,
     },
     methods: {
-      speak: function(message) {
-        cable.speak(message)
+      speak: function(userName, message) {
+        cable.speak(userName ,message)
       }
     },
     computed: {

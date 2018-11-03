@@ -1,22 +1,29 @@
 <template>
-  <form @submit.prevent="speak">
-    <div class="form-group">
-      <input v-model="newMessage" placeholder="発言する" class="form-control">
+  <div class="form-row">
+    <div class="col-2">
+      <input v-model="userName" placeholder="名前" class="form-control">
     </div>
-  </form>
+    <div class="col">
+      <input v-model="message" @keyup.enter="speak" placeholder="発言する" class="form-control">
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   data: function () {
     return {
-      newMessage: null
+      message: null,
+      userName: null,
     }
   },
   methods: {
     speak: function() {
-      this.$emit('speak', this.newMessage)
-      this.newMessage = null
+      if(!this.message || this.message.length <= 0) {
+        return
+      }
+      this.$emit('speak', this.userName, this.message)
+      this.message = null
     }
   }
 }

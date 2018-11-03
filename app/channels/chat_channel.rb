@@ -14,6 +14,7 @@ class ChatChannel < ApplicationCable::Channel
       ChatChannel.broadcast_to(@room, {
         event: data['event'],
         message: {
+          user_name: data['user_name'],
           text: data['message'],
           time: I18n.l(Time.current),
         }
