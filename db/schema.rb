@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_073102) do
     t.string "name", limit: 128
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_rooms_on_name"
+    t.index ["name"], name: "index_rooms_on_name", unique: true
   end
 
 end
