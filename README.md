@@ -1,25 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Action Cable + Vue.js を使ったチャットアプリ。
 
-Things you may want to cover:
+動作確認はこちら https://rails-chat-88.herokuapp.com
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Run Services
+* requirements
+  * ruby 2.5.3
+  * mysql
+* セットアップ
+  * `bundle install`
+  * `./bin/rails rake db:setup`
+* 開発サーバ起動方法
   * `./bin/foreman`
-
-* Deployment instructions
-
-* ...
+* テスト実行方法
+  * `./bin/rails spec`
