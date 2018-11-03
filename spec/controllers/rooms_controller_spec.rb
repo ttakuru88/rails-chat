@@ -1,14 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe RoomsController do
-  describe 'GET /' do
-    before { get :index }
-
-    it '200 OKが返る' do
-      expect(response).to have_http_status 200
-    end
-  end
-
   describe 'GET /rooms/:id' do
     subject { get :show, params: {id: room_name} }
 
