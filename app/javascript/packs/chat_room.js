@@ -25,17 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
       speak: function(userName, message) {
         cable.speak(userName ,message)
       }
-    },
-    computed: {
-      revereseMessages: function() {
-        return this.messages.reverse()
-      }
     }
   })
 
   cable.connect(roomName, {
     onReceiveMessage: (data) => {
-      chat.messages.push(data.message)
+      chat.messages.unshift(data.message)
     }
   })
 })
