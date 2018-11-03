@@ -12,14 +12,14 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
-  socket: /tmp/mysql.sock
 
 development:
   <<: *default
   database: rails-chat_development
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,6 +27,10 @@ development:
 test:
   <<: *default
   database: rails-chat_test
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  socket: /tmp/mysql.sock
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +53,4 @@ test:
 #
 production:
   <<: *default
-  database: rails-chat_production
-  username: rails-chat
-  password: <%= ENV['RAILS-CHAT_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
