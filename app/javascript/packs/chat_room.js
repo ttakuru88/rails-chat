@@ -6,12 +6,16 @@ import Message from '../message.vue'
 
 const urlPaths = location.pathname.split('/')
 const roomName = decodeURIComponent(urlPaths[urlPaths.length - 1])
-const cable = new Cable
 
 document.addEventListener('DOMContentLoaded', () => {
   const chatEl = document.getElementById('js-chat')
+  if(!chatEl) {
+    return
+  }
+  const cable = new Cable
+
   const chat = new Vue({
-    el: '#js-chat',
+    el: chatEl,
     data: {
       roomName: roomName,
       messages: [],
