@@ -3,7 +3,9 @@
 
   %ul.list-group
     - @rooms.each do |room|
-      %li.list-group-item= link_to room.name, room_path(id: room.name)
+      %li.list-group-item
+        = link_to room.name, room_path(id: room.name)
+        = "#{@number_of_users[room.name]} 人"
 
 = form_with model: @room || Room.new, class: 'col-6' do |f|
   %h2 チャットルーム新規作成

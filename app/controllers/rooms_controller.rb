@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   def index
     @rooms = load_rooms
+    @number_of_users = load_room_users_count
   end
 
   def show
@@ -21,6 +22,14 @@ class RoomsController < ApplicationController
 
   def load_rooms
     Room.all
+  end
+
+  def load_room_users_count
+    ActionCable
+      .server
+      .open_connections_statistics
+      .flat_map { |con| con[:subscriptions].map { |s| JSON.parse(s)["room_name"] } }
+      .inject(Hash.new(0)) { |counter, room_name| counter.tap { |h| counter[room_name] += 1 } }
   end
 
   def safe_name_from_params
