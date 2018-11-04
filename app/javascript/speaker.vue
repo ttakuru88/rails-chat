@@ -1,12 +1,17 @@
 <template>
-  <div class="form-row mb-4">
-    <div class="col-2">
-      <input v-model="userName" placeholder="名前" class="form-control">
+  <form @submit.prevent="speak">
+    <div class="form-row mb-4" >
+      <div class="col-2">
+        <input v-model="userName" placeholder="名前" class="form-control">
+      </div>
+      <div class="col">
+        <input v-model="message" placeholder="発言する" class="form-control">
+      </div>
+      <div class="col"
+        <input class="btn btn-primary" type="submit" value="発言">
+      </div>
     </div>
-    <div class="col">
-      <input v-model="message" @keyup.enter="speak" placeholder="発言する" class="form-control">
-    </div>
-  </div>
+  </form>
 </template>
 
 <script>
