@@ -2,4 +2,4 @@
   %room-header(v-bind:room-name="roomName")
   %speaker(v-on:speak="speak")
   %ul.list-group.list-group-flush
-    %message(v-for="message in messages" v-bind:message="message")
+    %message(v-for="message in sortedMessages" v-bind:message="message")

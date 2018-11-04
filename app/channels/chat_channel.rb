@@ -21,8 +21,8 @@ class ChatChannel < ApplicationCable::Channel
     when 'get_messages'
       revision = data['revision'].to_i
 
-      messages = @room.messages.order(id: :asc).where('id > ?', revision)
-      messages = messages.reorder(id: :desc).limit(25).reverse if revision.zero?
+      messages = @room.messages.where('id > ?', revision)
+      messages = messages.order(id: :desc).limit(25) if revision.zero?
 
       transmit(event: 'messages', messages: messages.map(&:to_response))
     end

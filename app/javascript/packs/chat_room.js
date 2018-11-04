@@ -35,6 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return revision
       }
+    },
+    computed: {
+      sortedMessages: function() {
+        return this.messages.sort((a, b) => { return b.id - a.id })
+      }
     }
   })
 
@@ -43,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
       cable.getMessages(chat.revision())
     },
     onReceiveMessage: (message) => {
-      chat.messages.unshift(message)
+      chat.messages.push(message)
     },
     onGetMessages: (messages) => {
       messages.forEach((message) => {
-        chat.messages.unshift(message)
+        chat.messages.push(message)
       })
     }
   })
