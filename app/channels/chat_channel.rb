@@ -11,14 +11,17 @@ class ChatChannel < ApplicationCable::Channel
   def receive(data)
     case data['event']
     when 'speak'
-      ChatChannel.broadcast_to(@room, {
-        event: data['event'],
-        message: {
-          user_name: data['user_name'],
-          text: data['message'],
-          time: I18n.l(Time.current),
-        }
-      })
+      message = @room.messages.new(user_name: data['user_name'], text: data['message'])
+      if message.save
+        ChatChannel.broadcast_to(@room, {
+          event: data['event'],
+          message: {
+            user_name: data['user_name'],
+            text: data['message'],
+            time: I18n.l(message.created_at),
+          }
+        })
+      end
     end
   end
 end
