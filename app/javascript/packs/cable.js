@@ -11,13 +11,26 @@ class Cable {
       room_name: roomName,
     },
     {
+      connected: () => {
+        callbacks.onConnected()
+      },
       received: (data) => {
         switch(data.event) {
           case 'speak':
-            callbacks.onReceiveMessage(data)
+            callbacks.onReceiveMessage(data.message)
+            break
+          case 'messages':
+            callbacks.onGetMessages(data.messages)
             break
         }
       }
+    })
+  }
+
+  getMessages(revision) {
+    this.subscription.send({
+      event: 'get_messages',
+      revision: revision,
     })
   }
 

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el: '#js-chat',
     data: {
       roomName: roomName,
-      messages: []
+      messages: [],
     },
     components: {
       RoomHeader,
@@ -24,13 +24,31 @@ document.addEventListener('DOMContentLoaded', () => {
     methods: {
       speak: function(userName, message) {
         cable.speak(userName ,message)
+      },
+      revision: function() {
+        let revision = 0
+        this.messages.forEach((message) => {
+          if(message.id > revision) {
+            revision = message.id
+          }
+        })
+
+        return revision
       }
     }
   })
 
   cable.connect(roomName, {
-    onReceiveMessage: (data) => {
-      chat.messages.unshift(data.message)
+    onConnected: () => {
+      cable.getMessages(chat.revision())
+    },
+    onReceiveMessage: (message) => {
+      chat.messages.unshift(message)
+    },
+    onGetMessages: (messages) => {
+      messages.forEach((message) => {
+        chat.messages.unshift(message)
+      })
     }
   })
 })

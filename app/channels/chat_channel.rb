@@ -15,13 +15,16 @@ class ChatChannel < ApplicationCable::Channel
       if message.save
         ChatChannel.broadcast_to(@room, {
           event: data['event'],
-          message: {
-            user_name: data['user_name'],
-            text: data['message'],
-            time: I18n.l(message.created_at),
-          }
+          message: message.to_response,
         })
       end
+    when 'get_messages'
+      revision = data['revision'].to_i
+
+      messages = @room.messages.order(id: :asc).where('id > ?', revision)
+      messages = messages.reorder(id: :desc).limit(25).reverse if revision.zero?
+
+      transmit(event: 'messages', messages: messages.map(&:to_response))
     end
   end
 end
