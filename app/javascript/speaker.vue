@@ -15,11 +15,15 @@
 </template>
 
 <script>
+import Store from 'store'
+
+const storeKey = `${location.pathname}_userName`
+
 export default {
   data: function () {
     return {
       message: null,
-      userName: null,
+      userName: Store.get(storeKey),
     }
   },
   methods: {
@@ -29,6 +33,7 @@ export default {
       }
       this.$emit('speak', this.userName, this.message)
       this.message = null
+      Store.set(storeKey, this.userName)
     }
   }
 }
