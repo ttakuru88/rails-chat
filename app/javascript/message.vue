@@ -27,7 +27,7 @@ export default {
       if(now.year() != createdAt.year()){
         return createdAt.format('YYYY-MM-DD HH:mm')
       }
-      else if(now.month() != createdAt.month() && now.date() != createdAt.date()){
+      else if(now.month() != createdAt.month() || now.date() != createdAt.date()){
         return createdAt.format('MM-DD HH:mm')
       }
       else {
