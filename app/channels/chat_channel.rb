@@ -1,6 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
     @room = Room.find_by(name: params[:room_name])
+    @room.touch
     stream_for(@room) if @room
   end
 
@@ -17,6 +18,7 @@ class ChatChannel < ApplicationCable::Channel
           event: data['event'],
           message: message.to_response,
         })
+        @room.touch
       end
     when 'get_messages'
       revision = data['revision'].to_i

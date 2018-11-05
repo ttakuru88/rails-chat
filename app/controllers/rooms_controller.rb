@@ -2,6 +2,9 @@ class RoomsController < ApplicationController
   def index
     @rooms = load_rooms
     @number_of_users = load_room_users_count
+
+    RoomCleaner.clean_deserted_rooms(@rooms, @number_of_users)
+    @rooms.reload
   end
 
   def show
