@@ -28,15 +28,13 @@ class Cable {
   }
 
   getMessages(revision) {
-    this.subscription.send({
-      event: 'get_messages',
+    this.subscription.perform('get_messages', {
       revision: revision,
     })
   }
 
   speak(userName, message) {
-    this.subscription.send({
-      event: 'speak',
+    this.subscription.perform('speak', {
       user_name: userName,
       message: message,
     })
