@@ -3,6 +3,7 @@ import Vue from 'vue/dist/vue.esm.js'
 import RoomHeader from '../room_header.vue'
 import Speaker from '../speaker.vue'
 import Message from '../message.vue'
+import Notifier from './notifier.js'
 
 const urlPaths = location.pathname.split('/')
 const roomName = decodeURIComponent(urlPaths[urlPaths.length - 1])
@@ -12,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if(!chatEl) {
     return
   }
+  const notifier = new Notifier
   const cable = new Cable
-
   const chat = new Vue({
     el: chatEl,
     data: {
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     onReceiveMessage: (message) => {
       chat.messages.push(message)
+      notifier.notify(`${message.user_name}「${message.text}」`)
     },
     onGetMessages: (messages) => {
       messages.forEach((message) => {
